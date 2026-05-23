@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Portfolio</title>
+  <link rel="stylesheet" href="anhheang.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+ <header>
+    <nav>
+      <h1 class="logo">Anh<span>Heang</span></h1>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="images.jpg" download="AnhHeang_CV.png" class="btn">Download CV</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+<section class="hero" id="home">
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+      <p>Hello, My name is</p>
+      <h2>Anh<span>Heang</span></h2>
+      <h3>I'm AnhHeang Game Developer</h3>
+
+      <div class="hero-buttons">
+        <input type="text" placeholder="Enter your Email">
+        <a href="#contact"><button>Get Contact</button></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="about-container">
+
+      <div class="about-image">
+        <img src="heangg.png" alt="anime">
+      </div>
+
+      <div class="about-text">
+        <h2>About me</h2>
+        <h4>Roblox Game Developer</h4>
+
+        <p>
+          I'm studying at school and also learning Roblox Studio.
+          I love coding and building anime style games.
+        </p>
+
+        <p>
+          I create admin systems, UI designs, and game mechanics.
+        </p>
+
+        <a href="#contact" class="btn">Contact Me</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <h2>Services</h2>
+
+    <div class="service-boxes">
+
+      <div class="card">
+        <h3>🎮 Roblox Game</h3>
+        <p>I create hangout and horror style Roblox games.</p>
+      </div>
+
+      <div class="card">
+        <h3>💻 Building</h3>
+        <p>I build maps, systems, and UI for Roblox Studio.</p>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Developer</h3>
+        <p>Fast scripting and smooth gameplay systems.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <h2>Contact me for your work.</h2>
+
+    <form id="contactForm">
+      <input type="email" id="userEmail" placeholder="Enter your Email" required>
+      <input type="text" id="userSocial" placeholder="Facebook Profile or Discord Username" required>
+      <textarea id="userMessage" placeholder="Write to me..." required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 AnhHeang - All Rights Reserved</p>
+  </footer>
+
+  <!-- Webhook Script -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+
+      const webhookUrl = 'https://discord.com/api/webhooks/1507633055014064198/ROJJllKg00q_OZsGeekBslH0Cpm2hBA4vPh_JMA_ZXYZinCf759e4hgK_oQ7Bzd_28ED';
+
+      const email = document.getElementById('userEmail').value;
+      const social = document.getElementById('userSocial').value;
+      const message = document.getElementById('userMessage').value;
+
+      // Construct a clean message format for Discord
+      const requestData = {
+        embeds: [{
+          title: "📂 New Contact Form Submission",
+          color: 16738355, // Anime pink/orange color hex code in decimal
+          fields: [
+            { name: "📧 Email", value: email, inline: true },
+            { name: "📱 Social (FB/Discord)", value: social, inline: true },
+            { name: "💬 Message", value: message }
+          ],
+          timestamp: new Date().toISOString()
+        }]
+      };
+
+      // Send the data to Discord using Fetch API
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Message sent successfully!');
+          document.getElementById('contactForm').reset(); // Clear the form
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Could not send message. Check your connection.');
+      });
+    });
+  </script>
+
+</body>
+</html>
